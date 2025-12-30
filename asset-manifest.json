@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/jiteshkewalramani/DSA_Visualizer/static/css/main.c2f02976.css",
-    "main.js": "/jiteshkewalramani/DSA_Visualizer/static/js/main.59b0ad7d.js",
-    "index.html": "/jiteshkewalramani/DSA_Visualizer/index.html",
-    "main.c2f02976.css.map": "/jiteshkewalramani/DSA_Visualizer/static/css/main.c2f02976.css.map",
-    "main.59b0ad7d.js.map": "/jiteshkewalramani/DSA_Visualizer/static/js/main.59b0ad7d.js.map"
+    "main.css": "/DSA_Visualizer/static/css/main.c2f02976.css",
+    "main.js": "/DSA_Visualizer/static/js/main.59b0ad7d.js",
+    "index.html": "/DSA_Visualizer/index.html",
+    "main.c2f02976.css.map": "/DSA_Visualizer/static/css/main.c2f02976.css.map",
+    "main.59b0ad7d.js.map": "/DSA_Visualizer/static/js/main.59b0ad7d.js.map"
   },
   "entrypoints": [
     "static/css/main.c2f02976.css",

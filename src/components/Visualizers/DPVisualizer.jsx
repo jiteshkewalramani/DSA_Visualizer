@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 import PseudoCodePanel from '../Shared/PseudoCodePanel';
+import VisualizerLayout from '../Shared/VisualizerLayout';
 
-export default function DPVisualizer({ pseudoCode }) {
+export default function DPVisualizer({ pseudoCode, topic, setCurrentTopic }) {
   const [problem, setProblem] = useState('fibonacci');
   const [n, setN] = useState(10);
   const [running, setRunning] = useState(false);
@@ -72,7 +73,8 @@ export default function DPVisualizer({ pseudoCode }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="mb-4 flex gap-2 flex-wrap">
           <select
@@ -142,5 +144,6 @@ export default function DPVisualizer({ pseudoCode }) {
         <PseudoCodePanel title={`${problem === 'fibonacci' ? 'Fibonacci' : 'Coin Change'} Pseudo Code`} code={pseudoCode[problem]} />
       </div>
     </div>
+    </VisualizerLayout>
   );
 }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Plus, Search, Trash2 } from 'lucide-react';
 import PseudoCodePanel from '../Shared/PseudoCodePanel';
+import VisualizerLayout from '../Shared/VisualizerLayout';
 
-export default function HashTableVisualizer({ pseudoCode }) {
+export default function HashTableVisualizer({ pseudoCode, topic, setCurrentTopic }) {
   const [table, setTable] = useState(Array(10).fill(null).map(() => []));
   const [inputKey, setInputKey] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -71,7 +72,8 @@ export default function HashTableVisualizer({ pseudoCode }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="mb-4 flex gap-2 flex-wrap">
           <input
@@ -133,5 +135,6 @@ export default function HashTableVisualizer({ pseudoCode }) {
         <PseudoCodePanel title={`${operation.charAt(0).toUpperCase() + operation.slice(1)} Pseudo Code`} code={pseudoCode[operation]} />
       </div>
     </div>
+    </VisualizerLayout>
   );
 }

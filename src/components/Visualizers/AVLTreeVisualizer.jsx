@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import { AVLTree, copyTree, calculateTreePositions } from '../../utils/dataStructures';
 import PseudoCodePanel from '../Shared/PseudoCodePanel';
+import VisualizerLayout from '../Shared/VisualizerLayout';
 
-export default function AVLTreeVisualizer({ pseudoCode }) {
+export default function AVLTreeVisualizer({ pseudoCode, topic, setCurrentTopic }) {
   const [avl, setAvl] = useState(new AVLTree());
   const [inputValue, setInputValue] = useState('');
   const [message, setMessage] = useState('');
@@ -59,7 +60,8 @@ export default function AVLTreeVisualizer({ pseudoCode }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="mb-4 flex gap-2">
           <input
@@ -105,5 +107,6 @@ export default function AVLTreeVisualizer({ pseudoCode }) {
         <PseudoCodePanel title={`${operation === 'insert' ? 'Insert' : 'Rotation'} Pseudo Code`} code={pseudoCode[operation]} />
       </div>
     </div>
+    </VisualizerLayout>
   );
 }

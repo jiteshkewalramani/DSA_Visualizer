@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import PseudoCodePanel from '../Shared/PseudoCodePanel';
+import VisualizerLayout from '../Shared/VisualizerLayout';
 
-export default function LinkedListVisualizer({ pseudoCode }) {
+export default function LinkedListVisualizer({ pseudoCode, topic, setCurrentTopic }) {
   const [list, setList] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [message, setMessage] = useState('');
@@ -32,7 +33,8 @@ export default function LinkedListVisualizer({ pseudoCode }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="mb-4 flex gap-2 flex-wrap">
           <input
@@ -95,5 +97,6 @@ export default function LinkedListVisualizer({ pseudoCode }) {
         <PseudoCodePanel title={`${operation.charAt(0).toUpperCase() + operation.slice(1)} Pseudo Code`} code={pseudoCode[operation]} />
       </div>
     </div>
+    </VisualizerLayout>
   );
 }

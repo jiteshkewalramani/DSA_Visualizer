@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Play, RefreshCw } from 'lucide-react';
 import PseudoCodePanel from '../Shared/PseudoCodePanel';
+import VisualizerLayout from '../Shared/VisualizerLayout';
 
-export default function SortingVisualizer({ pseudoCode }) {
+export default function SortingVisualizer({ pseudoCode, topic, setCurrentTopic }) {
   const [array, setArray] = useState([]);
   const [sorting, setSorting] = useState(false);
   const [algorithm, setAlgorithm] = useState('bubble');
@@ -83,7 +84,8 @@ export default function SortingVisualizer({ pseudoCode }) {
   const maxValue = Math.max(...array, 1);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="mb-4 flex gap-2 flex-wrap">
           <select
@@ -120,5 +122,6 @@ export default function SortingVisualizer({ pseudoCode }) {
         <PseudoCodePanel title={`${algorithm === 'bubble' ? 'Bubble' : 'Quick'} Sort Pseudo Code`} code={pseudoCode[algorithm]} />
       </div>
     </div>
+    </VisualizerLayout>
   );
 }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import PseudoCodePanel from '../Shared/PseudoCodePanel';
+import VisualizerLayout from '../Shared/VisualizerLayout';
 
-export default function HeapVisualizer({ pseudoCode }) {
+export default function HeapVisualizer({ pseudoCode, topic, setCurrentTopic }) {
   const [heap, setHeap] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [heapType, setHeapType] = useState('min');
@@ -144,7 +145,8 @@ export default function HeapVisualizer({ pseudoCode }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="mb-4 flex gap-2 flex-wrap">
           <select
@@ -201,5 +203,6 @@ export default function HeapVisualizer({ pseudoCode }) {
         <PseudoCodePanel title={`${operation.charAt(0).toUpperCase() + operation.slice(1)} Pseudo Code`} code={pseudoCode[operation]} />
       </div>
     </div>
+    </VisualizerLayout>
   );
 }

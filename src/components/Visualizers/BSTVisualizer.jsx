@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { RotateCcw, Play, SkipForward, SkipBack } from 'lucide-react';
+import { RotateCcw, Play, SkipForward, SkipBack, Code, BookOpen } from 'lucide-react';
 import { BST, copyTree, calculateTreePositions } from '../../utils/dataStructures';
 import VisualizerLayout from '../Shared/VisualizerLayout';
+import LearningSection from '../Learning/LearningSection';
+import { bstLearningContent } from '../../data/learningContent/bstLearning';
 
 export default function BSTVisualizer({ pseudoCode, topic, setCurrentTopic }) {
+  // Tab state - default to learning/theory tab
+  const [activeTab, setActiveTab] = useState('learning');
+
   const [bst, setBst] = useState(new BST());
   const [inputValue, setInputValue] = useState('');
   const [message, setMessage] = useState('');
@@ -352,9 +357,40 @@ export default function BSTVisualizer({ pseudoCode, topic, setCurrentTopic }) {
     ];
 
   return (
-    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
-      {/* Control Panel */}
-      <div className="bg-slate-800 rounded-lg p-4 mb-6 border border-slate-700">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic} hideConceptsButton={true}>
+      {/* Tab Navigation */}
+      <div className="bg-slate-800 rounded-lg border border-slate-700 mb-6 overflow-hidden">
+        <div className="flex border-b border-slate-700">
+          <button
+            onClick={() => setActiveTab('learning')}
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-all ${
+              activeTab === 'learning'
+                ? 'bg-blue-600 text-white border-b-2 border-blue-400'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            }`}
+          >
+            <BookOpen size={18} />
+            Learn Theory
+          </button>
+          <button
+            onClick={() => setActiveTab('visualizer')}
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-all ${
+              activeTab === 'visualizer'
+                ? 'bg-blue-600 text-white border-b-2 border-blue-400'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            }`}
+          >
+            <Code size={18} />
+            Interactive Visualizer
+          </button>
+        </div>
+      </div>
+
+      {/* Visualizer Tab */}
+      {activeTab === 'visualizer' && (
+        <>
+          {/* Control Panel */}
+          <div className="bg-slate-800 rounded-lg p-4 mb-6 border border-slate-700">
         <div className="flex flex-wrap gap-4 items-end">
           <div className="flex-1 min-w-[200px]">
             <label className="block text-sm font-medium text-slate-300 mb-2">Value</label>
@@ -567,6 +603,13 @@ export default function BSTVisualizer({ pseudoCode, topic, setCurrentTopic }) {
           )}
         </div>
       </div>
+        </>
+      )}
+
+      {/* Learning Tab */}
+      {activeTab === 'learning' && (
+        <LearningSection learningContent={bstLearningContent} />
+      )}
     </VisualizerLayout>
   );
 }

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Play } from 'lucide-react';
+import { Play, Code, BookOpen } from 'lucide-react';
 import PseudoCodePanel from '../Shared/PseudoCodePanel';
 import VisualizerLayout from '../Shared/VisualizerLayout';
+import LearningSection from '../Learning/LearningSection';
+import { dpLearningContent } from '../../data/learningContent/dpLearning';
 
 export default function DPVisualizer({ pseudoCode, topic, setCurrentTopic }) {
+  // Tab state - default to learning/theory tab
+  const [activeTab, setActiveTab] = useState('learning');
+
   const [problem, setProblem] = useState('fibonacci');
   const [n, setN] = useState(10);
   const [running, setRunning] = useState(false);
@@ -73,8 +78,39 @@ export default function DPVisualizer({ pseudoCode, topic, setCurrentTopic }) {
   };
 
   return (
-    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <VisualizerLayout topic={topic} setCurrentTopic={setCurrentTopic} hideConceptsButton={true}>
+      {/* Tab Navigation */}
+      <div className="bg-slate-800 rounded-lg border border-slate-700 mb-6 overflow-hidden">
+        <div className="flex border-b border-slate-700">
+          <button
+            onClick={() => setActiveTab('learning')}
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-all ${
+              activeTab === 'learning'
+                ? 'bg-blue-600 text-white border-b-2 border-blue-400'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            }`}
+          >
+            <BookOpen size={18} />
+            Learn Theory
+          </button>
+          <button
+            onClick={() => setActiveTab('visualizer')}
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-all ${
+              activeTab === 'visualizer'
+                ? 'bg-blue-600 text-white border-b-2 border-blue-400'
+                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+            }`}
+          >
+            <Code size={18} />
+            Interactive Visualizer
+          </button>
+        </div>
+      </div>
+
+      {/* Visualizer Tab */}
+      {activeTab === 'visualizer' && (
+        <>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div className="mb-4 flex gap-2 flex-wrap">
           <select
@@ -144,6 +180,13 @@ export default function DPVisualizer({ pseudoCode, topic, setCurrentTopic }) {
         <PseudoCodePanel title={`${problem === 'fibonacci' ? 'Fibonacci' : 'Coin Change'} Pseudo Code`} code={pseudoCode[problem]} />
       </div>
     </div>
+        </>
+      )}
+
+      {/* Learning Tab */}
+      {activeTab === 'learning' && (
+        <LearningSection learningContent={dpLearningContent} />
+      )}
     </VisualizerLayout>
   );
 }
